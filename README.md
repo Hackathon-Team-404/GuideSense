@@ -1,7 +1,7 @@
 # GuideSense
 
-
-This project is a **wheelchair navigation assistant** that uses computer vision and voice control to provide real-time guidance and feedback. It leverages **YOLO** for object detection and a **voice interface** for activation and control.
+Introducing GuidenSense, sensing obstacles, speaking solutions - your personal navigation companion.
+It features **wheelchair navigation assistant** that uses computer vision and voice control to provide real-time guidance and feedback. It leverages **YOLO** for object detection and a **voice interface** for activation and control.
 
 ## Features
 
@@ -50,12 +50,14 @@ pip install -r requirements.txt
 ```
 
 5. **Set Up OpenAI API Key:**
-
+</br>*You can even use an empty key, we will fix this later.*
 - Create a `.env` file in the root directory and add your OpenAI API key:
 
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
+XAI_API_KEY=your_grok_api_key
 ```
+* Note:  Unless you want to use LLM version, you can input an empty key like : OPENAI_API_KEY=""
 
 ## Usage
 
