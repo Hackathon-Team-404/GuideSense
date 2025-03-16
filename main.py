@@ -22,7 +22,7 @@ def main():
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 320)
         
-    print("Waiting for activation phrase: 'Let's go'...")
+    print("Waiting for activation phrase: 'Go'...")
     print("Press 'q' to quit")
     
     last_analysis_time = 0
@@ -80,7 +80,7 @@ def main():
                     frame = detector.draw_detections(frame, last_detection_results)
             else:
                 # Draw waiting message on frame
-                cv2.putText(frame, "Waiting for activation: 'Let's go'", 
+                cv2.putText(frame, "Waiting for activation: 'Go'", 
                            (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
             
             # Show processed frame
