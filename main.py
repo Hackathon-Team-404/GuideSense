@@ -7,13 +7,13 @@ from voice_control import VoiceController
 
 def main():
     # Initialize components
-    detector = ObjectDetector(frame_width=640, frame_height=320)
+    detector = ObjectDetector(model_path="yolov8n.pt", frame_width=640, frame_height=320)
     analyzer = SituationAnalyzer()
     audio = AudioFeedback()
     voice_control = VoiceController()
     
     # Initialize video capture (0 is usually the built-in webcam)
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
     if not cap.isOpened():
         print("Error: Could not open video capture device")
         return

@@ -18,7 +18,7 @@ class ObjectDetector:
     
     def __init__(self, model_path: str = 'yolov8n.pt', frame_width: int = 640, frame_height: int = 320):
         """Initialize the YOLO model."""
-        self.model = YOLO(model_path)
+        self.model = YOLO(model_path, task="detect")
         self.frame_width = frame_width
         self.frame_height = frame_height
         
