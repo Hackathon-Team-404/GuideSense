@@ -18,7 +18,7 @@ class ObjectDetector:
     
     def __init__(self, model_path: str = 'yolov8n.pt', frame_width: int = 640, frame_height: int = 320):
         """Initialize the YOLO model."""
-        self.model = YOLO(model_path)
+        self.model = YOLO(model_path, task="detect")
         self.frame_width = frame_width
         self.frame_height = frame_height
         
@@ -26,6 +26,8 @@ class ObjectDetector:
         self.focal_length = frame_width  # A reasonable default
         self.sensor_height = frame_height
         self.vertical_fov = 50  # Typical vertical FOV for webcams (degrees)
+
+        self.model.overrides['imgsz'] = 320
         
     def _calculate_distance(self, box_height: float, object_class: str) -> Dict[str, float]:
         """

@@ -4,16 +4,19 @@ from object_detector import ObjectDetector
 from situation_analyzer import SituationAnalyzer
 from audio_feedback import AudioFeedback
 from voice_control import VoiceController
+import pyttsx3
+import threading
+import queue
 
 def main():
     # Initialize components
-    detector = ObjectDetector(frame_width=640, frame_height=320)
+    detector = ObjectDetector(model_path="yolov8n.pt", frame_width=640, frame_height=320)
     analyzer = SituationAnalyzer()
     audio = AudioFeedback()
     voice_control = VoiceController()
     
     # Initialize video capture (0 is usually the built-in webcam)
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
     if not cap.isOpened():
         print("Error: Could not open video capture device")
         return
@@ -36,7 +39,7 @@ def main():
             ret, frame = cap.read()
             if not ret:
                 print("Error: Could not read frame")
-                continue
+                continuepy
             
             # Check if system is activated
             if voice_control.is_system_active():
