@@ -125,13 +125,16 @@ class SituationAnalyzer:
 
     def _create_situation_description(self, detections: List[Dict]) -> str:
         """Create a natural language description of the detected objects."""
+        if not detections:
+            return "Path clear"
+
+        # More concise descriptions
         descriptions = []
         for det in detections:
-            desc = (f"A {det['object']} is {det['distance']} away in the {det['position']} "
-                    f"position with {det['confidence']*100:.0f}% confidence")
+            desc = f"{det['object']} {det['distance']} {det['position']}"
             descriptions.append(desc)
 
-        return " ".join(descriptions)
+        return ", ".join(descriptions)
 
     def _analyze_image_with_grok(self, frame, detections: List[Dict]) -> str:
         """
@@ -151,9 +154,12 @@ class SituationAnalyzer:
 
             # Create a prompt that includes context from YOLO detections
             detection_context = self._create_situation_summary(detections)
-            prompt = (f"You are a navigation assistant for a wheelchair user. "
-                      f"Describe this scene in 1-2 sentences, focusing on navigation hazards and paths. "
-                      f"Context from object detection: {detection_context}")
+
+            # Modified prompt to get more concise responses
+            prompt = (f"You are a wheelchair navigation assistant. "
+                      f"Use maximum 10 words to describe navigation hazards. "
+                      f"Be extremely brief. Only mention important obstacles. "
+                      f"Context: {detection_context}")
 
             # Create messages for Grok Vision API
             messages = [
@@ -175,16 +181,22 @@ class SituationAnalyzer:
                 }
             ]
 
-            # Call Grok Vision API
+            # Call Grok Vision API with lower temperature for more concise responses
             completion = self.grok_client.chat.completions.create(
                 model=self.grok_model,
                 messages=messages,
-                temperature=0.2,
-                max_tokens=100  # Keep descriptions brief
+                temperature=0.1,  # Lower temperature for more focused responses
+                max_tokens=100     # Reduced max tokens for brevity
             )
 
             # Extract the description from the response
             description = completion.choices[0].message.content.strip()
+
+            # Further trim long descriptions
+            if len(description) > 100:
+                # Split and take first sentence only
+                description = description.split('.')[0]
+
             return description
 
         except Exception as e:
@@ -195,22 +207,18 @@ class SituationAnalyzer:
     def _create_situation_summary(self, detections: List[Dict]) -> str:
         """Create a concise summary of detections for the prompt."""
         if not detections:
-            return "No objects detected"
+            return "clear path"
 
-        # Create a summary of object counts by type and position
-        object_counts = {}
+        # Create an ultra-concise summary focused on obstacles
+        obstacles = []
         for det in detections:
-            key = (det['object'], det['position'], det['distance'])
-            object_counts[key] = object_counts.get(key, 0) + 1
+            if det['distance'] != "far" and det['confidence'] > 0.4:
+                obstacles.append(f"{det['object']} {det['position']}")
 
-        # Create a structured scene description
-        scene_elements = []
-        for (obj_type, position, distance), count in object_counts.items():
-            count_str = f"{count} " if count > 1 else ""
-            scene_elements.append(
-                f"{count_str}{obj_type}(s) {distance} away to the {position}")
+        if not obstacles:
+            return "clear path"
 
-        return ", ".join(scene_elements)
+        return ", ".join(obstacles)
 
     def toggle_grok_descriptions(self, enabled: bool = True):
         """Enable or disable Grok descriptions."""

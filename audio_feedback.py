@@ -9,7 +9,7 @@ import platform
 class AudioFeedback:
     def __init__(self):
         """Initialize audio feedback system."""
-        self.message_queue = queue.Queue(maxsize=5)  # Increased queue size
+        self.message_queue = queue.Queue(maxsize=3)  # Increased queue size
         self.is_running = True
         self.speech_thread = threading.Thread(
             target=self._process_speech_queue)
@@ -104,13 +104,15 @@ class AudioFeedback:
 
             if self.use_say:
                 # Use macOS 'say' command with faster rate for better real-time performance
-                subprocess.run(['say', '-r', '180', text], check=True)
+                # Increased speech rate from 180 to 220
+                subprocess.run(['say', '-r', '220', text], check=True)
             else:
                 # Fallback to pyttsx3 for other platforms
                 import pyttsx3
                 engine = pyttsx3.init()
                 # Even faster rate for short commands
-                engine.setProperty('rate', 180)
+                # Increased speech rate from 180 to 220
+                engine.setProperty('rate', 220)
                 engine.say(text)
                 engine.runAndWait()
                 engine.stop()
