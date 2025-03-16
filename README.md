@@ -85,7 +85,7 @@ recognition/
 ├── requirements.txt        # Lists all Python dependencies
 └── .env                    # Contains API keys (excluded from version control)
 ```
-[Watch the Demo](demo.mov)
+[Watch the Demo](demo.gif)
 
 ---
 
