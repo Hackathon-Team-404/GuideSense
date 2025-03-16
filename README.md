@@ -22,7 +22,7 @@ This project is a **wheelchair navigation assistant** that uses computer vision 
 1. **Clone the Repository:**
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Hackathon-Team-404/YOLO-and-audio-recognition.git
 cd recognition
 ```
 
