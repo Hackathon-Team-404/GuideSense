@@ -26,6 +26,8 @@ class ObjectDetector:
         self.focal_length = frame_width  # A reasonable default
         self.sensor_height = frame_height
         self.vertical_fov = 50  # Typical vertical FOV for webcams (degrees)
+
+        self.model.overrides['imgsz'] = 320
         
     def _calculate_distance(self, box_height: float, object_class: str) -> Dict[str, float]:
         """
