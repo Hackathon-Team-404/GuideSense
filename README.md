@@ -23,7 +23,7 @@ This project is a **wheelchair navigation assistant** that uses computer vision 
 
 ```bash
 git clone https://github.com/Hackathon-Team-404/YOLO-and-audio-recognition.git
-cd recognition
+cd YOLO-and-audio-recognition
 ```
 
 2. **Set Up Python Environment:**
