@@ -4,6 +4,9 @@ from object_detector import ObjectDetector
 from situation_analyzer import SituationAnalyzer
 from audio_feedback import AudioFeedback
 from voice_control import VoiceController
+import pyttsx3
+import threading
+import queue
 
 def main():
     # Initialize components
@@ -36,7 +39,7 @@ def main():
             ret, frame = cap.read()
             if not ret:
                 print("Error: Could not read frame")
-                continue
+                continuepy
             
             # Check if system is activated
             if voice_control.is_system_active():
