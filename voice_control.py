@@ -9,7 +9,7 @@ import os
 
 
 class VoiceController:
-    def __init__(self, activation_phrase="go"):
+    def __init__(self, activation_phrase="start"):
         """Initialize voice controller with activation phrase."""
         self.activation_phrase = activation_phrase.lower()
         self.is_listening = False
