@@ -1,4 +1,5 @@
-# YOLO-and-Audio-Recognition
+# GuideSense
+
 
 This project is a **wheelchair navigation assistant** that uses computer vision and voice control to provide real-time guidance and feedback. It leverages **YOLO** for object detection and a **voice interface** for activation and control.
 
