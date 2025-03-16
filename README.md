@@ -96,10 +96,15 @@ recognition/
 ---
 ## Authors
 Tianyu Fang: https://www.linkedin.com/in/tianyu-fang-tim/
+
 Anson He: https://www.linkedin.com/in/ansonhex/
+
 Dingying Jin: https://www.linkedin.com/in/dingyangjin/
+
 Hao Wu: https://www.linkedin.com/in/haowuhw/
+
 Harshill: https://www.linkedin.com/in/harshil-c/
+
 
 ## License
 
