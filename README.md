@@ -1,4 +1,5 @@
 # GuideSense
+## Won the 1st Place at the Qualcomm x Microsoft x Northeastern University On-Device AI Hackathon
 
 Introducing GuidenSense, sensing obstacles, speaking solutions - your personal navigation companion.
 It features **wheelchair navigation assistant** that uses computer vision and voice control to provide real-time guidance and feedback. It leverages **YOLO** for object detection and a **voice interface** for activation and control.
