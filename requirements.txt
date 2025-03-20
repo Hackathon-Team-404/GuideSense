@@ -11,4 +11,5 @@ torch
 torchaudio 
 qai_hub_models[whisper_base_en]
 onnx
+onnxruntime
 onnxruntime-qnn==1.19
